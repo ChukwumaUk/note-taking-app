@@ -33,7 +33,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       
-      <body className="min-h-screen bg-gray-100 text-gray-800">
+      <body className="min-h-screen bg-gray-100 text-gray-800" suppressHydrationWarning>
         <Providers>
           <Navbar />
             <main className="max-w-3xl mx-auto p-6">
