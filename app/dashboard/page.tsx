@@ -1,13 +1,14 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import NotesList from "../components/NotesList";
 
 
 async function createNote(formData: FormData) {
   "use server";
 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if(!session?.user?.email) return;
 
@@ -31,7 +32,7 @@ async function createNote(formData: FormData) {
 async function deleteNote(id: number) {
   "use server";
 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if(!session?.user?.email) return;
 
@@ -48,7 +49,7 @@ async function deleteNote(id: number) {
 async function updateNote(formData: FormData) {
   "use server";
 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if(!session?.user?.email) return;
 
@@ -73,7 +74,7 @@ async function updateNote(formData: FormData) {
 export default async function DashboardPage() {
     
     async function getNotes() {
-      const session = await getServerSession();
+      const session = await getServerSession(authOptions);
 
       if(!session?.user?.email) return [];
 
